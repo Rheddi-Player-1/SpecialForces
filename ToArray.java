@@ -56,20 +56,22 @@ public class ToArray
 		
 		return bigArray;
 	}
-
+	// sorts characters of the first row of the array which in turn will sort the remaining characters of the row into columns.
 	public String[][] sortByLetter()
 	{
 		String[][] bigArray = bigArray();
 		boolean pass = true;
-
+		//
 		for (int k = 1; k < 10 && pass; k++)
 		{
 			pass = false;
+			//
 			for(int i = 0; i < 10 - k; i++)
 			{
 				if(bigArray[0][i].compareTo(bigArray[0][i+1]) > 0)
 				{
 					String[][] temp = new String[rows][1];
+					//
 					for(int j = 0; j < rows; j++)
 					{
 						temp[j][0] = bigArray[j][i];
