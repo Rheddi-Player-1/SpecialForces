@@ -61,17 +61,18 @@ public class ToArray
 	{
 		String[][] bigArray = bigArray();
 		boolean pass = true;
-		//
+		// first for-loop uses the first row of characters to compare to the characters of the other columns.
 		for (int k = 1; k < 10 && pass; k++)
 		{
 			pass = false;
-			//
+			//second for-loop uses the indexes compared up until the comparison of the middle two columns.
 			for(int i = 0; i < 10 - k; i++)
 			{
+				
 				if(bigArray[0][i].compareTo(bigArray[0][i+1]) > 0)
 				{
 					String[][] temp = new String[rows][1];
-					//
+					// Uses created temp array to sort characters and put them in the right position in bigArray
 					for(int j = 0; j < rows; j++)
 					{
 						temp[j][0] = bigArray[j][i];
@@ -84,11 +85,12 @@ public class ToArray
 		}
 		return bigArray;
 	}
-
+	//
 	public String toString(String[][] array)
 	{
 		String message = "";
 		String spacedMessage = "";
+		//
 		for (int i = 0; i < 10; i++)
 		{
 			for(int j = 1; j < rows; j++)
@@ -96,6 +98,7 @@ public class ToArray
 				message += array[j][i];
 			}
 		}
+		// Adding Spaces to the message every five charcters and returns the meesage.
 		for(int i = 0; i < message.length(); i = i + 5)
 		{
 			spacedMessage += message.substring(i, i + 5) + " ";
