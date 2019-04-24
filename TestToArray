@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class TestToArray {
+
+    //Testing
+    public static void main(String[] args)
+
+    {
+        String tenLetterWord;
+        String message;
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter a message (Anything goes): ");
+        message = input.nextLine();
+
+        do {
+            System.out.println("Enter a 10 letter word: ");
+
+
+            tenLetterWord = input.nextLine();
+
+            while(tenLetterWord.length() != 10) {
+                System.out.println("That's not a ten letter word...");
+                System.out.println("Enter a 10 letter word: ");
+                tenLetterWord = input.nextLine();
+            }
+
+            ToArray combinedMessage = new ToArray(tenLetterWord, message);
+
+            //ToArray aFriggenMessage = new ToArray("Abductions", "CASH MONEY RECORDS TAKING OVER FOR THE NINE NINE AND THE TWO THOUSANDS!");
+
+            String[][] cypher = combinedMessage.bigArray();
+
+            System.out.println("Cypher that has been created! (1st row): 10 letter word / (Rest of the Rows): Message");
+            System.out.println();
+
+            for (int i = 0; i < cypher.length; i++) {
+                for (int j = 0; j < 10; j++) {
+                    System.out.print(cypher[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+
+            String[][] sorted = combinedMessage.sortByLetter(cypher);
+            System.out.println();
+
+            System.out.println("Cypher after columns have been sorted (EXCLUDES FIRST ROW): ");
+            System.out.println();
+            for (int i = 1; i < sorted.length; i++) {
+                for (int j = 0; j < 10; j++) {
+                    System.out.print(sorted[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+            System.out.println();
+
+            System.out.println("Five letter Strings retrieved from sorted columns: ");
+            System.out.println(combinedMessage.toString(sorted));
+
+            System.out.println();
+
+            ToArray sortedCombinedMessage = new ToArray(tenLetterWord, combinedMessage.toString1(sorted));
+
+            String[][] nextCypher = sortedCombinedMessage.bigArray();
+        }
+        while(true);
+    }
+}
+
