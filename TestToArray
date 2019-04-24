@@ -8,27 +8,34 @@ public class TestToArray {
     {
         String tenLetterWord;
         String message;
+        boolean keepGoing = true;
 
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter a message (Anything goes): ");
         message = input.nextLine();
 
-        do {
+        while(keepGoing) {
             System.out.println("Enter a 10 letter word: ");
 
 
             tenLetterWord = input.nextLine();
 
-            while(tenLetterWord.length() != 10) {
-                System.out.println("That's not a ten letter word...");
-                System.out.println("Enter a 10 letter word: ");
-                tenLetterWord = input.nextLine();
+
+            while (tenLetterWord.length() != 10) {
+                if(tenLetterWord.equalsIgnoreCase("Stop"))
+                {
+                    keepGoing = false;
+                    System.out.println("Good Bye");
+                }
+                else {
+                    System.out.println("That's not a ten letter word...");
+                    System.out.println("Enter a 10 letter word: ");
+                    tenLetterWord = input.nextLine();
+                }
             }
 
             ToArray combinedMessage = new ToArray(tenLetterWord, message);
-
-            //ToArray aFriggenMessage = new ToArray("Abductions", "CASH MONEY RECORDS TAKING OVER FOR THE NINE NINE AND THE TWO THOUSANDS!");
 
             String[][] cypher = combinedMessage.bigArray();
 
@@ -62,11 +69,13 @@ public class TestToArray {
 
             System.out.println();
 
-            ToArray sortedCombinedMessage = new ToArray(tenLetterWord, combinedMessage.toString1(sorted));
+            message = combinedMessage.toString1(sorted);
+
+            ToArray sortedCombinedMessage = new ToArray(tenLetterWord, message);
 
             String[][] nextCypher = sortedCombinedMessage.bigArray();
         }
-        while(true);
     }
 }
+
 
