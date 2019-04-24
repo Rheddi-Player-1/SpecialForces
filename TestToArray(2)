@@ -1,0 +1,79 @@
+import java.util.Scanner;
+
+public class TestToArray {
+
+    //Testing
+    public static void main(String[] args) {
+        String tenLetterWord;
+        String message;
+        boolean keepGoing = true;
+
+        while (keepGoing) {
+            Scanner input = new Scanner(System.in);
+
+
+            System.out.println("Enter a message (Anything goes): ");
+            message = input.nextLine();
+
+            for (int k = 0; k < 2; k++) {
+
+                System.out.println("Enter a 10 letter word: ");
+
+                tenLetterWord = input.nextLine();
+
+                while (tenLetterWord.length() != 10 && keepGoing == true) {
+                    if (tenLetterWord.equalsIgnoreCase("Stop") || message == null) {
+                        keepGoing = false;
+                        System.out.println("Good Bye");
+                        System.out.println("Please ignore the following output: ");
+                    } else {
+                        System.out.println("That's not a ten letter word...");
+                        System.out.println("Enter a 10 letter word: ");
+                        tenLetterWord = input.nextLine();
+                    }
+                }
+
+                ToArray combinedMessage = new ToArray(tenLetterWord, message);
+
+                String[][] cypher = combinedMessage.bigArray();
+
+                System.out.println("Cypher that has been created! (1st row): 10 letter word / (Rest of the Rows): Message");
+                System.out.println();
+
+                for (int i = 0; i < cypher.length; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        System.out.print(cypher[i][j] + " ");
+                    }
+                    System.out.println();
+                }
+
+
+                String[][] sorted = combinedMessage.sortByLetter(cypher);
+                System.out.println();
+
+                System.out.println("Cypher after columns have been sorted (EXCLUDES FIRST ROW): ");
+                System.out.println();
+                for (int i = 1; i < sorted.length; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        System.out.print(sorted[i][j] + " ");
+                    }
+                    System.out.println();
+                }
+
+                System.out.println();
+
+                System.out.println("Five letter Strings retrieved from sorted columns: ");
+                System.out.println(combinedMessage.toString(sorted));
+
+                System.out.println();
+
+                message = combinedMessage.toString1(sorted);
+            }
+            System.out.println("Double Encryption completed!");
+            System.out.println();
+            System.out.println("TIME TO ENCRYPT A NEW MESSAGE!");
+            System.out.println("If you dont want to continue making another encryption, leave message empty and/or type 'stop' for 10 letter word)");
+        }
+    }
+}
+
