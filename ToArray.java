@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**Class: ToArray
  *
  * @author Danielle's Group
