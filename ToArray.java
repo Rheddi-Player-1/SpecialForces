@@ -107,35 +107,18 @@ public class ToArray
 		return spacedMessage;
 	}
 
-	//Testing 
-	public static void main(String[] args)
+	/** Method: printArray
+	  * @parm String[][] array
+	  * 
+	  * prints the contents of the multidimensional array
+	  */
+	public static printArray(String[][] array)
 	{
-		ToArray aFriggenMessage = new ToArray("Abductions", "CASH MONEY RECORDS TAKING OVER FOR THE NINE NINE AND THE TWO THOUSANDS!");
-		
-		String[][] array = aFriggenMessage.bigArray();
-		
-		for (int i = 0; i < array.length; i++)
-		{
-			for(int j = 0; j < 10; j++)
-			{
-				System.out.print(array[i][j] + " ");
-			}
-			System.out.println();
-		}
-
-
-		String[][] sorted = aFriggenMessage.sortByLetter();
-		System.out.println();
-
-		for (int i = 1; i < sorted.length; i++)
-		{
-			for(int j = 0; j < 10; j++)
-			{
-				System.out.print(sorted[i][j] + " ");
-			}
-			System.out.println();
-		}
-
-		System.out.println(aFriggenMessage.toString(sorted));
+		for (int i = 0; i < array.length; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        System.out.print(array[i][j] + " ");
+                    }
+                System.out.println();
+                }
 	}
 }
