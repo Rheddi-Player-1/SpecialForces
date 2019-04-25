@@ -4,7 +4,8 @@ public class TestToArray {
 
     //Testing
     public static void main(String[] args) {
-        String tenLetterWord;
+        String firstWord;
+        String secondWord;
         String message;
         boolean keepGoing = true;
 
@@ -17,48 +18,38 @@ public class TestToArray {
 
             for (int k = 0; k < 2; k++) {
 
-                System.out.println("Enter a 10 letter word: ");
+                System.out.println("Enter two 10 letter words: ");
 
-                tenLetterWord = input.nextLine();
-
-                while (tenLetterWord.length() != 10 && keepGoing == true) {
-                    if (tenLetterWord.equalsIgnoreCase("Stop") || message == null) {
+                firstWord = input.nextLine();
+                secondWord = input.nextLine();
+                
+                while (firstWord.length() != 10 || secondWord.length() != 10) {
+                    if (firstWord.equalsIgnoreCase("Stop") || message == null) {
                         keepGoing = false;
                         System.out.println("Good Bye");
-                        System.out.println("Please ignore the following output: ");
+                        System.exit(0);
                     } else {
                         System.out.println("That's not a ten letter word...");
                         System.out.println("Enter a 10 letter word: ");
-                        tenLetterWord = input.nextLine();
+                        firstWord = input.nextLine();
+                        secondWord = input.nextLine();
                     }
                 }
 
-                ToArray combinedMessage = new ToArray(tenLetterWord, message);
+                ToArray combinedMessage = new ToArray(firstWord, message);
 
-                String[][] cypher = combinedMessage.bigArray();
-
-                System.out.println("Cypher that has been created! (1st row): 10 letter word / (Rest of the Rows): Message");
+                System.out.println("First run of cypher that has been created! (1st row): 10 letter word / (Rest of the Rows): Message");
                 System.out.println();
 
-                for (int i = 0; i < cypher.length; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        System.out.print(cypher[i][j] + " ");
-                    }
-                    System.out.println();
-                }
+                combinedMessage.printArray(combinedMessage.bigArray());
 
 
-                String[][] sorted = combinedMessage.sortByLetter(cypher);
+                String[][] sorted = combinedMessage.sortByLetter(combinedMessage.bigArray());
                 System.out.println();
 
                 System.out.println("Cypher after columns have been sorted (EXCLUDES FIRST ROW): ");
                 System.out.println();
-                for (int i = 1; i < sorted.length; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        System.out.print(sorted[i][j] + " ");
-                    }
-                    System.out.println();
-                }
+                combinedMessage.printArray(sorted);
 
                 System.out.println();
 
@@ -67,12 +58,26 @@ public class TestToArray {
 
                 System.out.println();
 
-                message = combinedMessage.toString1(sorted);
+                String newMessage = combinedMessage.toString(sorted);
+                
+                ToArray secondRun = new ToArray(secondWord, newMessage);
+                
+                System.out.println("Second run of cypher!);
+                
+                String[][] secondSort = secondRun.sortByLetter(secondRun.bigArray());
+                
+                secondRun.printArray(secondSort);
+                
+                System.out.println("Five letter Strings retrieved from sorted columns: ");
+                System.out.println(secondRun.toString(secondRun));
+                System.out.println("Double Encryption completed!");
+            
+                System.out.println();
+                System.out.println("TIME TO ENCRYPT A NEW MESSAGE!");
+                System.out.println("If you dont want to continue making another encryption, leave message empty and/or type 'stop' for 10 letter word)");
+            
             }
-            System.out.println("Double Encryption completed!");
-            System.out.println();
-            System.out.println("TIME TO ENCRYPT A NEW MESSAGE!");
-            System.out.println("If you dont want to continue making another encryption, leave message empty and/or type 'stop' for 10 letter word)");
+            
         }
     }
 }
