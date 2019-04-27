@@ -1,0 +1,23 @@
+public String[][] decrpyt(String word, String[][] array)
+	{
+		String[][] newArray = new String[array.length][10];
+		boolean pass = true;
+
+		for(int i = 1; i < 10 && pass; i++)
+		{
+			pass = false;
+			for(int j = 0; j < 10 - i; j++)
+			{
+				String letter = Character.toString(word.charAt(j));
+				if(letter.equalsIgnoreCase(array[0][i]))
+				{
+					for(int k = 0; k < array.length; k++)
+					{
+						newArray[k][j] = array[k][j];
+					}
+					pass = true;
+				}
+			}
+		}
+		return newArray;
+	}
